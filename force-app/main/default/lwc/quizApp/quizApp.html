@@ -1,0 +1,37 @@
+<template>
+    <lightning-card title="Lwc Quizz">
+        <div class="slds-m-around_medium">
+            <form>
+             
+                <template for:each={questionList} for:item="list">
+                    <div key={list.id} class="slds-m-bottom_medium">
+                        <strong>{list.id} - {list.question}</strong>
+                        <div class="slds-grid slds-gutters slds-m-bottom_medium">
+                            <div class="slds-col">
+                                <input type="radio" name={list.id} value="a" onchange={onChnageHandler} />
+                                {list.answers.a}
+                            </div>
+                            <div class="slds-col">
+                                <input type="radio" name={list.id} value="b" onchange={onChnageHandler} />
+                                {list.answers.b}
+                            </div>
+                            <div class="slds-col">
+                                <input type="radio" name={list.id} value="c" onchange={onChnageHandler} />
+                                {list.answers.c}
+                            </div>
+
+                        </div>
+                    </div>
+
+                </template>
+                <lightning-button variant="brand" label="Submit" title="Submit Quizz" onclick={submitHandler}
+                    disabled={notAllSelected} class="slds-m-around_small"></lightning-button>
+                <lightning-button variant="brand" label="Reset" title="Reset Quizz" onclick={resetHandler}
+                    class="slds-m-around_small"></lightning-button>
+            </form>
+            <template if:true={isSubmitted}>
+                <div class={isScoredFUll}>You have scrored {correctAnswers} out of {questionList.length} </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
